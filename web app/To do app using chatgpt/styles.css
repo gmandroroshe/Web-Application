@@ -21,7 +21,7 @@ h1 {
     text-align: center;
 }
 
-input[type="text"] {
+input[type="text"], input[type="time"] {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
@@ -62,6 +62,12 @@ li {
 li.completed {
     text-decoration: line-through;
     color: #888;
+}
+
+li .task-time {
+    font-size: 0.9em;
+    color: #888;
+    margin-left: 10px;
 }
 
 li button {
