@@ -31,9 +31,31 @@ document.getElementById("add-task").addEventListener("click", function () {
     li.appendChild(timeSpan);
     li.appendChild(completeButton);
     li.appendChild(deleteButton);
+    li.dataset.time = taskTime;
 
     taskList.appendChild(li);
     taskInput.value = "";
     taskTimeInput.value = "";
   }
 });
+
+function checkAlarms() {
+  let taskListItems = document.querySelectorAll("#task-list li");
+  let currentTime = new Date();
+  let currentHours = String(currentTime.getHours()).padStart(2, "0");
+  let currentMinutes = String(currentTime.getMinutes()).padStart(2, "0");
+  let currentFormattedTime = `${currentHours}:${currentMinutes}`;
+
+  taskListItems.forEach(function (li) {
+    if (
+      li.dataset.time === currentFormattedTime &&
+      !li.classList.contains("completed")
+    ) {
+      document.getElementById("alarm-sound").play();
+      li.classList.add("completed"); // Mark the task as completed to prevent multiple alarms
+    }
+  });
+}
+
+// Check alarms every minute
+setInterval(checkAlarms, 60000);
